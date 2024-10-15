@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chord;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class ChordController extends Controller
 {
