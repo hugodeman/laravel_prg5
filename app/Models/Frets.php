@@ -5,18 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Arr;
 
-class Chord extends Model
+class Frets extends Model
 {
-//    public function comments(): hasMany
-//    {
-//        return $this->hasMany(comment::class);
-//    }
-
     public function chord():BelongsTo
     {
         return $this->belongsTo(Chord::class);
     }
 }
-
