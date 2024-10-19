@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('chords', function (Blueprint $table) {
-                $table->foreignId('frets_id');
+//                $table->foreignIdFor(\App\Models\Frets::class);
         });
     }
 

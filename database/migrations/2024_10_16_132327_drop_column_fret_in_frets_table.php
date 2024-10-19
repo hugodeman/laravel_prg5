@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('frets', function (Blueprint $table) {
-            $table->dropForeignId('frets_id');
+//            $table->dropForeignId('frets_id');
         });
     }
 

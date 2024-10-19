@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('chords', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('user_id');
+            $table->foreignIdFor(App\Models\User::class);
+            $table->foreignIdFor(App\Models\Frets::class);
             $table->string('note');
             $table->timestamps();
         });

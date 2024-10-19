@@ -14,7 +14,6 @@ class FretController extends Controller
     {
 
         $frets = frets::all();
-//        dd($frets);
         return view('frets.index', compact('frets'));
     }
 
@@ -34,7 +33,7 @@ class FretController extends Controller
         $fret = new Frets();
         $fret->fret = $request->input('fret');
 
-        $fret->user_id = \Auth::user()->id;
+//        $fret->user_id = \Auth::user()->id;
 
         $fret->save();
 

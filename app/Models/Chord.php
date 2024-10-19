@@ -9,14 +9,14 @@ use Illuminate\Support\Arr;
 
 class Chord extends Model
 {
-//    public function comments(): hasMany
-//    {
-//        return $this->hasMany(comment::class);
-//    }
-
-    public function chord():BelongsTo
+    public function fret():BelongsTo
     {
-        return $this->belongsTo(Chord::class);
+        return $this->belongsTo(Frets::class);
+    }
+
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
 
