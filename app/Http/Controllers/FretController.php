@@ -30,6 +30,16 @@ class FretController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'fret' => 'required|unique:frets|max:22|numeric|min:0',
+        ],
+        ['required' => 'vul dit veld in',
+            'unique' => 'fret bestaat al',
+            'numeric' => 'Vul een getal in',
+            'max' => 'Vul een fret nummer in tussen 0 en 22',
+            'min' => 'Vul een fret nummer in tussen 0 en 22',
+        ]);
+
         $fret = new Frets();
         $fret->fret = $request->input('fret');
 
