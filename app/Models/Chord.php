@@ -11,7 +11,7 @@ class Chord extends Model
 {
     public function fret():BelongsTo
     {
-        return $this->belongsTo(Frets::class);
+        return $this->belongsTo(Fret::class);
     }
 
     public function user():BelongsTo
