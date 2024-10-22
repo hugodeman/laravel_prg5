@@ -19,7 +19,11 @@
 <header>
 
 </header>
+@auth
+    @if(auth()->user()->is_admin)
 
+    @endif
+@endauth
 <main>
     <p>{{ $slot }}</p>
 </main>

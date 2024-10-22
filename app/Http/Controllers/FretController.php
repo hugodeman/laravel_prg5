@@ -12,9 +12,14 @@ class FretController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->is_admin) {
 
-        $frets = Fret::all();
-        return view('frets.index', compact('frets'));
+            $frets = Fret::all();
+            return view('frets.index', compact('frets'));
+
+        } else {
+            return redirect()->route('frets.create');
+        }
     }
 
     /**
