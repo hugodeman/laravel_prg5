@@ -1,4 +1,3 @@
-@props(['frets'])
 <x-layout>
 
     <a href="{{  url(route('frets.create')) }}">Create frets</a>
@@ -7,6 +6,7 @@
 
     <ul>
         @foreach($frets as $fret)
+
             <li>
                 <x-fret :fret="$fret" />
 
@@ -14,7 +14,7 @@
 
                 <br>
 
-                <a href="{{ url(route('frets.edit')) }}">edit fret</a>
+                <a href="{{ url(route('frets.edit', $fret->id)) }}">edit fret</a>
 
 {{--                <form action="{{ route('frets.destroy') }}" method="POST">--}}
 {{--                    @csrf--}}
