@@ -6,4 +6,7 @@
 <li>
     Chord notes: {{ $chord ->note }}
 </li>
+    <li>
+        Starts at fret: {{ $chord ->frets_id }}
+    </li>
 </x-layout>
