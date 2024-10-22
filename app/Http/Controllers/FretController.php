@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\frets;
+use App\Models\Fret;
 use Illuminate\Http\Request;
 
 class FretController extends Controller
@@ -13,7 +13,7 @@ class FretController extends Controller
     public function index()
     {
 
-        $frets = frets::all();
+        $frets = Fret::all();
         return view('frets.index', compact('frets'));
     }
 
@@ -31,16 +31,17 @@ class FretController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'fret' => 'required|unique:frets|max:22|numeric|min:0',
+            'fret' => 'required|unique:frets|max:22|numeric|min:0|max_digits:2',
         ],
         ['required' => 'vul dit veld in',
             'unique' => 'fret bestaat al',
             'numeric' => 'Vul een getal in',
             'max' => 'Vul een fret nummer in tussen 0 en 22',
             'min' => 'Vul een fret nummer in tussen 0 en 22',
+            'max_digits' => 'vul maximaal twee getallen in'
         ]);
 
-        $fret = new Frets();
+        $fret = new Fret();
         $fret->fret = $request->input('fret');
 
 //        $fret->user_id = \Auth::user()->id;
@@ -53,31 +54,35 @@ class FretController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(frets $frets)
+    public function show(Fret $fret)
     {
-        return view('frets.show', compact('frets'));
+        return view('frets.show', compact('fret'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(frets $frets)
+    public function edit(Fret $fret)
     {
-        //
+        return view('frets.edit', compact('fret'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, frets $frets)
+    public function update(Request $request, Fret $fret)
     {
-        //
+        $fret->fret = $request->input('fret');
+        $fret->save();
+
+        return redirect()->route('frets.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(frets $fret)
+    public function destroy(Fret $fret)
     {
         $fret->delete();
         return redirect()->route('frets.index');

@@ -1,3 +1,4 @@
+@props(['fret'])
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
     <main>
-        <p>start at fret:{{ $fret->fret }}</p>
+        <p>Fret Number: {{ $fret->fret }}</p>
     </main>
 </body>
 </html>

@@ -1,18 +1,8 @@
-@props(['frets'])
-
-@php
-
-    /**
-     * @var \App\Models\Frets $frets
-     */
-
-@endphp
-
 <x-layout>
-    <x-fret :fret="$frets"/>
-    <form action="{{ url(route('frets.destroy', $frets)) }}" method="POST">
+    <h2> Fret:{{ $fret->fret }}</h2>
+    <form action="{{ route('frets.destroy', $fret) }}" method="POST">
         @method('DELETE')
-
-        <button type="submit">Submit</button>
+        @csrf
+        <button type="submit">Delete</button>
     </form>
 </x-layout>
