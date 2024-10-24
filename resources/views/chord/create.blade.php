@@ -17,6 +17,13 @@
             <label for="note">Notes: </label>
             <input type="text" id="note" name="note" placeholder="Notes:">
 
+            <label for="fret_id">Fret:</label>
+            <select name="fret_id" id="fret_id">
+                @foreach($frets as $fret)
+                    <option value="{{ $fret->id }}">{{ $fret->fret }}</option>
+                @endforeach
+            </select>
+
             <button type="submit">Add Chord</button>
         </form>
 
