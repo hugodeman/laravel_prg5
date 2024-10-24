@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignIdFor(App\Models\User::class);
-            $table->foreignIdFor(App\Models\Fret::class);
+            $table->foreignId('fret_id')->constrained('frets')->onDelete('cascade');
             $table->string('note');
             $table->timestamps();
         });
