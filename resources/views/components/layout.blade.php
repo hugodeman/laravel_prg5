@@ -13,7 +13,7 @@
     <x-nav-link href="{{ url(route('home.index') )}}"> Home </x-nav-link>
     <x-nav-link href="{{ url(route('chords.index') )}}"> Chords </x-nav-link>
     <x-nav-link href="{{ url(route('frets.index') )}}"> Frets </x-nav-link>
-    <br>
+
     <x-nav-link href="{{ url(route('dashboard') )}}"> Dashboard </x-nav-link>
 </nav>
 

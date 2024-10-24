@@ -20,11 +20,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/chords', [ChordController::class, 'index'])->name('chords.index') -> middleware('auth');
-
-Route::get('/chords/{id}', [ChordController::class, 'show'])->name('chords.show');
-
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+
+//Route::get('/chords', [ChordController::class, 'index'])->name('chords.index') -> middleware('auth');
+//Route::get('/chords/{id}', [ChordController::class, 'show'])->name('chords.show');
+//Route::get('/chords/create', [ChordController::class, 'create'])->name('chords.create');
+//Route::post('/chords', [ChordController::class, 'store'])->name('chords.store');
+Route::resource('/chords', ChordController::class);
+
 
 Route::resource('/frets', FretController::class);
 
