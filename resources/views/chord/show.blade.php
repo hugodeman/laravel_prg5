@@ -9,4 +9,5 @@
     <li>
         Starts at fret: {{ $chord ->fret ->fret }}
     </li>
+    <li>Created by: {{ $chord ->user -> name }}</li>
 </x-layout>

@@ -12,6 +12,13 @@
 
             <a href="/chords/{{ $chord['id'] }}">Details</a>
             <br>
+        @if($chord ->user_id ===\Auth::user()->id && $chordCount >= 3 )
+
+            <a href="{{ url(route('chords.edit', $chord->id)) }}">edit chord</a>
+                <a href="{{ url(route('chords.destroy', $chord->id)) }}">Delete chord</a>
+        @endif
+
+            <br>
             <br>
         @endforeach
     </ul>
