@@ -9,6 +9,7 @@
 
             <li>
                 <x-fret :fret="$fret" />
+                </li>
 
                 <a href="{{ url(route('frets.show', $fret->id)) }}">Show fret</a>
 
@@ -22,8 +23,8 @@
 {{--                    <button type="submit">Delete fret</button>--}}
 {{--                </form>--}}
 
-                <br>
-            </li>
+                <br><br>
+
         @endforeach
     </ul>
 </x-layout>

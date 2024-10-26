@@ -16,6 +16,8 @@
 
             <a href="{{ url(route('chords.edit', $chord->id)) }}">edit chord</a>
                 <a href="{{ url(route('chords.destroy', $chord->id)) }}">Delete chord</a>
+                <br>
+            <p>Je hebt drie chords gemaakt dus mag jij dit zien!</p>
         @endif
 
             <br>
