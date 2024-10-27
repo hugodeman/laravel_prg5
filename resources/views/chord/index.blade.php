@@ -12,12 +12,22 @@
 
             <a href="/chords/{{ $chord['id'] }}">Details</a>
             <br>
-        @if($chord ->user_id ===\Auth::user()->id && $chordCount >= 3 )
+        @if($chord ->user_id ===\Auth::user()->id && $chordCount >= 3 || \Auth::user()->is_admin )
 
             <a href="{{ url(route('chords.edit', $chord->id)) }}">edit chord</a>
-                <a href="{{ url(route('chords.destroy', $chord->id)) }}">Delete chord</a>
+                <form action="{{ url(route('chords.destroy', $chord->id)) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit">Delete chord</button>
+                </form>
+
                 <br>
+            @if(\Auth::user()->is_admin)
+                <p>Als admin mag jij dit zien</p>
+            @else
             <p>Je hebt drie chords gemaakt dus mag jij dit zien!</p>
+            @endif
         @endif
 
             <br>

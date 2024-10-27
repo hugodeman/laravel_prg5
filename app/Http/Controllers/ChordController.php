@@ -56,7 +56,8 @@ class ChordController extends Controller
 
     public function edit(Chord $chord)
     {
-        return view('chord.edit',compact('chord'));
+        $frets = Fret::all();
+        return view('chord.edit',compact('chord', 'frets'));
     }
 
     public function update(Request $request, Chord $chord)

@@ -1,5 +1,4 @@
 <x-layout>
-    <x-layout>
 
         @if ($errors->any())
             <ul>
@@ -9,16 +8,17 @@
             </ul>
         @endif
 
-        <form action="{{url(route('chords.update'))}}" method="POST">
+        <form action="{{url(route('chords.update', $chord->id))}}" method="POST">
             @csrf
+            @method('PUT')
 
-            <label for="name">Name: </label>
+            <label for="name">Change chord name: </label>
             <input type="text" id="name" name="name" placeholder="Name:">
 
-            <label for="note">Notes: </label>
+            <label for="note">Change chord notes: </label>
             <input type="text" id="note" name="note" placeholder="Notes:">
 
-            <label for="fret_id">Fret:</label>
+            <label for="fret_id">Change fret:</label>
             <select name="fret_id" id="fret_id">
                 @foreach($frets as $fret)
                     <option value="{{ $fret->id }}">{{ $fret->fret }}</option>
@@ -29,5 +29,3 @@
         </form>
 
     </x-layout>
-
-</x-layout>
