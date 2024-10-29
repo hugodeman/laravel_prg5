@@ -84,6 +84,16 @@ class ChordController extends Controller
         return redirect()->route('chords.index');
     }
 
+    public function updateStatus(Chord $chord){
+        if ($chord->status){
+            $chord->status = false;
+        } else{
+            $chord->status = true;
+        }
+        $chord->save();
+        return redirect()->route('chords.index');
+    }
+
     public function destroy(Chord $chord){
         $chord->delete();
         return redirect()->route('chords.index');

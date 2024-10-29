@@ -25,7 +25,10 @@ Route::middleware('auth')->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 
+ Route::patch('/chords/{chord}/status', [ChordController::class, 'updateStatus'])->name('chords.updateStatus');
 Route::resource('/chords', ChordController::class);
+//Route::post('/chords', [ChordController::class, 'updateStatus'])->name('chords.status-update');
+
 
 Route::resource('/frets', FretController::class);
 
