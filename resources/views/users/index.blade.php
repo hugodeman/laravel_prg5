@@ -25,6 +25,13 @@
                     <button type="submit">Activate</button>
                     @endif
                 </form>
+
+                <form action="{{url(route('users.destroy', $user->id)) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit">Delete user</button>
+                </form>
             </ul>
 <br>
         @endforeach

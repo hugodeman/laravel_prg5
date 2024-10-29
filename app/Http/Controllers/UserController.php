@@ -36,7 +36,12 @@ class UserController extends Controller
 
     }
 
-    public function destroy($id){
+    public function destroy(User $user){
+        $userChords = User::find($user->id);
+        $chords = $userChords->chord();
+        $chords->delete();
 
+        $user ->delete();
+        return redirect()->route('users.index');
     }
 }
