@@ -12,14 +12,8 @@ class FretController extends Controller
      */
     public function index()
     {
-        if(\Auth::user()->is_admin) {
-
-            $frets = Fret::all();
-            return view('frets.index', compact('frets'));
-
-        } else {
-            return redirect()->route('frets.create');
-        }
+        $frets = Fret::all();
+        return view('frets.index', compact('frets'));
     }
 
     /**
@@ -49,8 +43,6 @@ class FretController extends Controller
         $fret = new Fret();
         $fret->fret = $request->input('fret');
 
-//        $fret->user_id = \Auth::user()->id;
-
         $fret->save();
 
         return redirect()->route('frets.index');
@@ -77,11 +69,21 @@ class FretController extends Controller
      */
     public function update(Request $request, Fret $fret)
     {
+        $validated = $request->validate([
+            'fret' => 'required|unique:frets|max:22|numeric|min:0|max_digits:2',
+        ],
+            ['required' => 'vul dit veld in',
+                'unique' => 'fret bestaat al',
+                'numeric' => 'Vul een getal in',
+                'max' => 'Vul een fret nummer in tussen 0 en 22',
+                'min' => 'Vul een fret nummer in tussen 0 en 22',
+                'max_digits' => 'vul maximaal twee getallen in'
+            ]);
+
         $fret->fret = $request->input('fret');
         $fret->save();
 
         return redirect()->route('frets.index');
-
     }
 
     /**

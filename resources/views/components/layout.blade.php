@@ -13,18 +13,16 @@
     <x-nav-link href="{{ url(route('home.index') )}}"> Home </x-nav-link>
     <x-nav-link href="{{ url(route('chords.index') )}}"> Chords </x-nav-link>
     <x-nav-link href="{{ url(route('frets.index') )}}"> Frets </x-nav-link>
-
     <x-nav-link href="{{ url(route('dashboard') )}}"> Dashboard </x-nav-link>
+
+    @if(\Auth::user()->is_admin)
+        <x-nav-link href="{{ url(route('admin.index') )}}"> Admin dashboard </x-nav-link>
+    @endif
 </nav>
 
 <header>
 
 </header>
-@auth
-    @if(auth()->user()->is_admin)
-
-    @endif
-@endauth
 <main>
     <p>{{ $slot }}</p>
 </main>
