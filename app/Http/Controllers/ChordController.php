@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chord;
 use App\Models\Fret;
+use App\Models\Tag;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
@@ -11,10 +12,15 @@ class ChordController extends Controller
 {
     public function index(){
         $chords = Chord::all();
+        $tags = Tag::all();
 
         $chordUser = Chord::where('user_id', \Auth::user()->id)->get();
         $chordCount = $chordUser->count();
-        return view('chord.index',compact('chords', 'chordCount'));
+        return view('chord.index', [
+            'chords' => $chords,
+            'tags' => $tags,
+            'chordCount' => $chordCount,
+        ]);
     }
 
     public function show($id){
