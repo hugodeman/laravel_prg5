@@ -1,6 +1,8 @@
 <x-layout>
 
+    @if(\Auth::check())
     <a href="{{  url(route('frets.create')) }}">Create frets</a>
+    @endif
 
     <h1>Frets:</h1>
 
@@ -15,7 +17,9 @@
 
                 <br>
 
+            @if(\Auth::check())
                 <a href="{{ url(route('frets.edit', $fret->id)) }}">edit fret</a>
+            @endif
 
 {{--                <form action="{{ route('frets.destroy') }}" method="POST">--}}
 {{--                    @csrf--}}

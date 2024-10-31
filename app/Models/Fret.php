@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Fret extends Model
 {
+    protected $guarded = [];
+
     public function chord():hasMany
     {
         return $this->hasMany(Chord::class);

@@ -1,6 +1,8 @@
 <x-layout>
     <h1>Guitar chords list:</h1>
+    @if(\Auth::check())
     <a href="{{ url(route('chords.create')) }}">Create new chord</a>
+    @endif
 
     <h2>Tags:</h2>
     @foreach($tags as $tag)
@@ -8,63 +10,61 @@
     @endforeach
     <br><br>
 
-    <ul>
         <h2>Chords:</h2>
-        <div id="chord-index">
             @foreach($chords as $chord)
                 @if($chord->status || \Auth::user()->is_admin)
-                    <li>
-                        Chord name: {{ $chord ->name }}
-                    </li>
-                    <li>
-                        Chord notes: {{ $chord ->note }}
-                    </li>
-                    <li>
-                        @foreach($tags as $tag)
-                            <a href="#">{{ $tag ->name }}</a>
-                        @endforeach
-                    </li>
+                    <ul id="chord-index">
+                        <li>
+                            Chord name: {{ $chord ->name }}
+                        </li>
+                        <li>
+                            Chord notes: {{ $chord ->note }}
+                        </li>
+                        <li>
+                            @foreach($tags as $tag)
+                                <a href="#">{{ $tag ->name }}</a>
+                            @endforeach
+                        </li>
+                        <li>
+                        <a href="/chords/{{ $chord['id'] }}">Details</a>
+                        @if(\Auth::check())
+                            @if($chord ->user_id ===\Auth::user()->id && $chordCount >= 3 || \Auth::user()->is_admin )
 
-                    <li>
-                    <a href="/chords/{{ $chord['id'] }}">Details</a>
+                                <a href="{{ url(route('chords.edit', $chord->id)) }}">edit chord</a>
+                                <form action="{{ url(route('chords.destroy', $chord->id)) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
 
-                    @if($chord ->user_id ===\Auth::user()->id && $chordCount >= 3 || \Auth::user()->is_admin )
+                                    <button type="submit">Delete chord</button>
+                                </form>
 
-                        <a href="{{ url(route('chords.edit', $chord->id)) }}">edit chord</a>
-                        <form action="{{ url(route('chords.destroy', $chord->id)) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                                @if(\Auth::user()->is_admin)
+                                    <form action="{{ url(route('chords.updateStatus',$chord->id)) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
 
-                            <button type="submit">Delete chord</button>
-                        </form>
+                                        @if($chord->status)
+                                            <button type="submit">Unpublish</button>
+                                        @else
+                                            <button type="submit">Publish</button>
+                                        @endif
 
-                        @if(\Auth::user()->is_admin)
-                            <form action="{{ url(route('chords.updateStatus',$chord->id)) }}" method="POST">
-                                @csrf
-                                @method('PATCH')
 
-                                @if($chord->status)
-                                    <button type="submit">Unpublish</button>
-                                @else
-                                    <button type="submit">Publish</button>
+                                    </form>
                                 @endif
 
-
-                            </form>
+                                @if(\Auth::user()->is_admin)
+                                    <p>Als admin mag jij dit zien</p>
+                                @else
+                                    <p>Je hebt drie chords gemaakt dus mag jij dit zien!</p>
+                                @endif
+                            @endif
+                            </li>
                         @endif
 
-                        @if(\Auth::user()->is_admin)
-                            <p>Als admin mag jij dit zien</p>
-                        @else
-                            <p>Je hebt drie chords gemaakt dus mag jij dit zien!</p>
-                        @endif
-                    @endif
-                    </li>
+                            <br>
 
-                        <br>
-                        <br>
+                    </ul>
                 @endif
             @endforeach
-        </div>
-    </ul>
 </x-layout>

@@ -15,8 +15,10 @@
     <x-nav-link href="{{ url(route('frets.index') )}}"> Frets </x-nav-link>
     <x-nav-link href="{{ url(route('dashboard') )}}"> Dashboard </x-nav-link>
 
-    @if(\Auth::user()->is_admin)
-        <x-nav-link href="{{ url(route('admin.index') )}}"> Admin dashboard </x-nav-link>
+    @if(\Auth::check())
+        @if(\Auth::user()->is_admin)
+          <x-nav-link href="{{ url(route('admin.index') )}}"> Admin dashboard </x-nav-link>
+       @endif
     @endif
 </nav>
 

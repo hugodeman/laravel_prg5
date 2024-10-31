@@ -21,7 +21,11 @@ class FretController extends Controller
      */
     public function create()
     {
-        return view('frets.create');
+        if (\Auth::user()){
+            return view('frets.create');
+        } else{
+            return view('auth.login');
+        }
     }
 
     /**
@@ -61,7 +65,12 @@ class FretController extends Controller
      */
     public function edit(Fret $fret)
     {
-        return view('frets.edit', compact('fret'));
+        if (\Auth::user()){
+            $fret = Fret::all();
+            return view('frets.edit', compact( 'fret'));
+        } else{
+            return view('auth.login');
+        }
     }
 
     /**

@@ -10,6 +10,8 @@ use Illuminate\Support\Arr;
 
 class Chord extends Model
 {
+    protected $guarded = ['user_id','status'];
+
     public function fret():BelongsTo
     {
         return $this->belongsTo(Fret::class);

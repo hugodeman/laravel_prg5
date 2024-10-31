@@ -14,8 +14,13 @@ class ChordController extends Controller
         $chords = Chord::all();
         $tags = Tag::all();
 
+        if(!\Auth::check()){
+            return view('chord.index', compact('chords', 'tags'));
+        }
+
         $chordUser = Chord::where('user_id', \Auth::user()->id)->get();
         $chordCount = $chordUser->count();
+
         return view('chord.index', [
             'chords' => $chords,
             'tags' => $tags,
@@ -31,8 +36,12 @@ class ChordController extends Controller
 
     public function create()
     {
+        if (\Auth::user()){
         $frets = Fret::all();
-        return view('chord.create',compact('frets'));
+        return view('chord.create', compact('frets'));
+        } else{
+            return view('auth.login');
+        }
     }
 
     public function store(Request $request){
@@ -62,8 +71,12 @@ class ChordController extends Controller
 
     public function edit(Chord $chord)
     {
-        $frets = Fret::all();
-        return view('chord.edit',compact('chord', 'frets'));
+        if (\Auth::user() && $chord->user_id == \Auth::user()->id){
+            $frets = Fret::all();
+            return view('chord.edit', compact('chord', 'frets'));
+        } else{
+            return view('auth.login');
+        }
     }
 
     public function update(Request $request, Chord $chord)
