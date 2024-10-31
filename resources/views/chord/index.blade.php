@@ -11,6 +11,7 @@
     <br><br>
 
         <h2>Chords:</h2>
+        <h3>Total chords found: {{ $chords->count() }}</h3>
             @foreach($chords as $chord)
                 @if($chord->status || \Auth::user()->is_admin)
                     <ul id="chord-index">
@@ -21,7 +22,7 @@
                             Chord notes: {{ $chord ->note }}
                         </li>
                         <li>
-                            @foreach($tags as $tag)
+                            @foreach($chord->tags as $tag)
                                 <a href="#">{{ $tag ->name }}</a>
                             @endforeach
                         </li>

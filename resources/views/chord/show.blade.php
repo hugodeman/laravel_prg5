@@ -10,4 +10,10 @@
         Starts at fret: {{ $chord ->fret ->fret }}
     </li>
     <li>Created by: {{ $chord ->user -> name }}</li>
+    <li>
+        Tags:
+        @foreach($chord->tags as $tag)
+            <a href="#">{{ $tag ->name }}</a>
+        @endforeach
+    </li>
 </x-layout>

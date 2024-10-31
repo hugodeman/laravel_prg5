@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ChordController extends Controller
 {
     public function index(){
-        $chords = Chord::all();
+        $chords = Chord::latest()->get();
         $tags = Tag::all();
 
         if(!\Auth::check()){
@@ -21,11 +21,7 @@ class ChordController extends Controller
         $chordUser = Chord::where('user_id', \Auth::user()->id)->get();
         $chordCount = $chordUser->count();
 
-        return view('chord.index', [
-            'chords' => $chords,
-            'tags' => $tags,
-            'chordCount' => $chordCount,
-        ]);
+        return view('chord.index', compact('chords', 'tags', 'chordUser', 'chordCount'));
     }
 
     public function show($id){
@@ -38,7 +34,8 @@ class ChordController extends Controller
     {
         if (\Auth::user()){
         $frets = Fret::all();
-        return view('chord.create', compact('frets'));
+        $tags = Tag::all();
+        return view('chord.create', compact('frets','tags'));
         } else{
             return view('auth.login');
         }
@@ -47,8 +44,9 @@ class ChordController extends Controller
     public function store(Request $request){
         $validation = $request->validate([
             'name' => 'required | max:7 ',
-            'note' => 'required | max:6 | min:2 ',
+            'note' => 'required | max:12 | min:2 ',
             'fret_id' => 'required',
+            'tag' => 'required'
         ],
         [
             'required' => 'Vul dit veld in',
@@ -66,6 +64,9 @@ class ChordController extends Controller
         $chord->fret_id = $request->input('fret_id');
         $chord->save();
 
+//        $chord->tags()->attach($request->input('tag-type'));
+        $chord->tags()->sync($request->input('tag'));
+
         return redirect()->route('chords.index');
     }
 
@@ -73,7 +74,8 @@ class ChordController extends Controller
     {
         if (\Auth::user() && $chord->user_id == \Auth::user()->id){
             $frets = Fret::all();
-            return view('chord.edit', compact('chord', 'frets'));
+            $tags = Tag::all();
+            return view('chord.edit', compact('chord', 'frets', 'tags'));
         } else{
             return view('auth.login');
         }
@@ -85,6 +87,7 @@ class ChordController extends Controller
             'name' => 'required | max:7 ',
             'note' => 'required | max:6 | min:2 ',
             'fret_id' => 'required',
+            'tag' => 'required'
         ],
             [
                 'required' => 'Vul dit veld in',
@@ -99,6 +102,8 @@ class ChordController extends Controller
         $chord->note = $request->input('note');
         $chord->fret_id = $request->input('fret_id');
         $chord->save();
+
+        $chord->tags()->sync($request->input('tag'));
 
         return redirect()->route('chords.index');
     }
