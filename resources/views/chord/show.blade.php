@@ -13,7 +13,7 @@
     <li>
         Tags:
         @foreach($chord->tags as $tag)
-            <a href="#">{{ $tag ->name }}</a>
+            <a href="{{ route('chords.filterTag', $tag->id) }}" class="tag-link">{{ $tag->name }}</a>
         @endforeach
     </li>
 </x-layout>

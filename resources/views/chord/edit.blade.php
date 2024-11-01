@@ -22,6 +22,7 @@
 
             <label for="fret_id">Change fret:</label>
             <select name="fret_id" id="fret_id">
+                <option value="{{ $chord->fret->id }}" selected >{{ $chord->fret->fret }}</option>
                 @foreach($frets as $fret)
                     <option value="{{ $fret->id }}">{{ $fret->fret }}</option>
                 @endforeach
@@ -34,9 +35,9 @@
             <br><br>
 
             <label for="tag">Tag:</label>
-            <select name="tag[]" id="tag" required>
+            <select name="tag[]" id="tag">
 
-                <option value="" selected disabled>choose tag</option>
+                <option value="{{ $chord->tags[0]->id }}" selected >{{ $chord->tags[0]->name }}</option>
                 @foreach($tags as $tag)
                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                 @endforeach
@@ -47,11 +48,11 @@
             @enderror
 
             <br><br>
-            <label for="tag">Tag:</label>
-            <select name="tag[]" id="tag" required>
 
-                <option value="" selected disabled>choose tag</option>
-                @foreach($tags as $tag)
+            <label for="tag">Tag:</label>
+            <select name="tag[]" id="tag">
+                <option value="{{ $chord->tags[1]->id}}" selected>{{ $chord->tags[1]->name }}</option>
+            @foreach($tags as $tag)
                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                 @endforeach
             </select>
