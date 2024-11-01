@@ -1,7 +1,23 @@
 # Changelog Eindproject
+## 01-11
+* filteren op tags gemaakt
+
+## 31-10
+* securtiy gemaakt
+* meerdere tags bij bijbehordende chord gemaakt
+
+## 30-10
+* middleware gemaakt voor admin validatie 
+* pivot tabel chord_tag gemaakt
+* tags gemaakt
+
+## 29-10
+* admin dashboard gemaakt
+* user overzicht + delete gemaakt
+* (un)publish chord gemaakt
+
 ## 27-10
 * chord edit aangepast
-
 
 ## 26-10
 * diepere validatie gemaakt + alleen de maker mag zijn post bewerken
