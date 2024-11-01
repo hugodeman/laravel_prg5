@@ -21,7 +21,22 @@ class ChordController extends Controller
         $chordUser = Chord::where('user_id', \Auth::user()->id)->get();
         $chordCount = $chordUser->count();
 
-        return view('chord.index', compact('chords', 'tags', 'chordUser', 'chordCount'));
+        return view('chord.index', compact('chords', 'tags', 'chordCount'));
+    }
+
+    public function filterTag(Tag $tag)
+    {
+        $chords = $tag->chords()->latest()->get();
+        $tags = Tag::all();
+
+        if(!\Auth::check()){
+            return view('chord.index', compact('chords', 'tags'));
+        }
+
+        $chordUser = Chord::where('user_id', \Auth::user()->id)->get();
+        $chordCount = $chordUser->count();
+
+        return view('chord.index', compact('chords', 'tags', 'chordCount'));
     }
 
     public function show($id){
@@ -64,7 +79,6 @@ class ChordController extends Controller
         $chord->fret_id = $request->input('fret_id');
         $chord->save();
 
-//        $chord->tags()->attach($request->input('tag-type'));
         $chord->tags()->sync($request->input('tag'));
 
         return redirect()->route('chords.index');
@@ -85,7 +99,7 @@ class ChordController extends Controller
     {
         $validation = $request->validate([
             'name' => 'required | max:7 ',
-            'note' => 'required | max:6 | min:2 ',
+            'note' => 'required | max:12 | min:2 ',
             'fret_id' => 'required',
             'tag' => 'required'
         ],

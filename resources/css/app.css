@@ -72,6 +72,14 @@ li a:hover {
     background-color: #0056b3; /* donkerdere blauwe tint bij hover */
 }
 
+#chord-index{
+    border-radius:20px;
+    padding:2vh 1vw;
+    margin-bottom: 7vh;
+    background-color: rgba(46, 46, 97, 0.34);
+    width:90%;
+}
+
 /* Buttons */
 button,
 li a {

@@ -6,7 +6,9 @@
 
     <h2>Tags:</h2>
     @foreach($tags as $tag)
-        <x-tag :$tag/>
+        <a href="{{ route('chords.filterTag', $tag->id) }}" class="tag-link">
+            {{ $tag->name }}
+        </a>
     @endforeach
     <br><br>
 
@@ -23,7 +25,7 @@
                         </li>
                         <li>
                             @foreach($chord->tags as $tag)
-                                <a href="#">{{ $tag ->name }}</a>
+                                <a href="{{ route('chords.filterTag', $tag->id) }}" class="tag-link">{{ $tag->name }}</a>
                             @endforeach
                         </li>
                         <li>
