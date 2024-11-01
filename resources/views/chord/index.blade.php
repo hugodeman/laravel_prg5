@@ -11,6 +11,15 @@
         </a>
     @endforeach
     <br><br>
+    @if(\Auth::check())
+        <h3>You have created {{$chordCount}} chords</h3>
+        @if($chordCount >=1)
+            <a href="{{ route('chords.filterUser') }}">See your chords </a>
+        @else
+            <a href="{{ url(route('chords.create')) }}">Create new chord</a>
+        @endif
+    @endif
+    <br>
 
         <h2>Chords:</h2>
         <h3>Total chords found: {{ $chords->count() }}</h3>

@@ -21,7 +21,7 @@ class ChordController extends Controller
         $chordUser = Chord::where('user_id', \Auth::user()->id)->get();
         $chordCount = $chordUser->count();
 
-        return view('chord.index', compact('chords', 'tags', 'chordCount'));
+        return view('chord.index', compact('chords', 'tags', 'chordCount', 'chordUser'));
     }
 
     public function filterTag(Tag $tag)
@@ -37,6 +37,21 @@ class ChordController extends Controller
         $chordCount = $chordUser->count();
 
         return view('chord.index', compact('chords', 'tags', 'chordCount'));
+    }
+
+    public function filterUser()
+    {
+        $chords = Chord::where('user_id', \Auth::user()->id)->get();
+        $tags = Tag::all();
+
+        if(!\Auth::check()){
+            return view('chord.index', compact('chords', 'tags'));
+        }
+
+        $chordUser = Chord::where('user_id', \Auth::user()->id)->get();
+        $chordCount = $chordUser->count();
+
+        return view('chord.index', compact('chords', 'tags', 'chordCount','chordUser'));
     }
 
     public function show($id){
@@ -86,7 +101,7 @@ class ChordController extends Controller
 
     public function edit(Chord $chord)
     {
-        if (\Auth::user() && $chord->user_id == \Auth::user()->id){
+        if (\Auth::user() && $chord->user_id == \Auth::user()->id ||\Auth::user()->is_admin){
             $frets = Fret::all();
             $tags = Tag::all();
             return view('chord.edit', compact('chord', 'frets', 'tags'));
@@ -100,8 +115,8 @@ class ChordController extends Controller
         $validation = $request->validate([
             'name' => 'required | max:7 ',
             'note' => 'required | max:12 | min:2 ',
-            'fret_id' => 'required',
-            'tag' => 'required'
+//            'fret_id' => 'required',
+//            'tag' => 'required'
         ],
             [
                 'required' => 'Vul dit veld in',

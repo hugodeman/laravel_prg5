@@ -27,6 +27,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 
 Route::get('/chords/tag/{tag}', [ChordController::class, 'filterTag'])->name('chords.filterTag');
+Route::get('/chords/filter/user', [ChordController::class, 'filterUser'])->name('chords.filterUser');
 Route::patch('/chords/{chord}/status', [ChordController::class, 'updateStatus'])->middleware(['auth', 'verified',ValidateAdmin::class])->name('chords.updateStatus');
 Route::resource('/chords', ChordController::class);
 
