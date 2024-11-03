@@ -14,19 +14,6 @@
                 </li>
 
                 <a href="{{ url(route('frets.show', $fret->id)) }}">Show fret</a>
-
-                <br>
-
-            @if(\Auth::check())
-                <a href="{{ url(route('frets.edit', $fret->id)) }}">edit fret</a>
-            @endif
-
-{{--                <form action="{{ route('frets.destroy') }}" method="POST">--}}
-{{--                    @csrf--}}
-{{--                    @method('DELETE')--}}
-{{--                    <button type="submit">Delete fret</button>--}}
-{{--                </form>--}}
-
                 <br><br>
 
         @endforeach
