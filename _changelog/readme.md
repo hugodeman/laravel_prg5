@@ -1,6 +1,10 @@
 # Changelog Eindproject
+## 03-11
+* project naar productie gezet
+
 ## 01-11
-* filteren op tags gemaakt
+* filteren op tags + usersgemaakt
+* edit chords aangepast dat oude informatie geselecteerd staat
 
 ## 31-10
 * securtiy gemaakt
